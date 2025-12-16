@@ -1,0 +1,77 @@
+name: weather_app_final
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  firebase_core: ^4.2.1
+  firebase_auth: ^6.1.2
+  http: ^1.1.0
+  geolocator: ^10.1.0
+  intl: ^0.18.1
+  geocoding: ^2.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  
+  fonts:
+    - family: Overpass
+      fonts:
+        - asset: assets/fonts/Overpass-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Overpass-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Overpass-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Overpass-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Overpass-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Overpass-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Overpass-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Overpass-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Overpass-Black.ttf
+          weight: 900
+        - asset: assets/fonts/Overpass-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Overpass-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/Overpass-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/Overpass-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Overpass-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Overpass-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Overpass-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Overpass-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Overpass-BlackItalic.ttf
+          weight: 900
+          style: italic
+
+  assets:
+    - assets/
