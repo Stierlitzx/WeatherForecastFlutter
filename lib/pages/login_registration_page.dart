@@ -167,7 +167,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                           image: isLogin ? AssetImage('assets/clear.png') : AssetImage('assets/cloudy.png'),
                         ),
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: 32),
         
                       Text(
                         'Weather Forecast',
@@ -178,7 +178,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                           letterSpacing: 1.2,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8),
                       Text(
                         isLogin ? 'Welcome back!' : 'Create your account',
                         style: TextStyle(
@@ -186,7 +186,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                           color: Colors.white.withOpacity(0.9),
                         ),
                       ),
-                      const SizedBox(height: 48),
+                      SizedBox(height: 48),
         
                       Container(
                         padding: const EdgeInsets.all(32),
@@ -225,7 +225,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                                 fillColor: Colors.grey.shade50,
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16),
         
                             TextField(
                               controller: _controllerPassword,
@@ -297,7 +297,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                                 ),
                               ),
                             ],
-                            const SizedBox(height: 24),
+                            SizedBox(height: 24),
         
                             if (errorMessage != null && errorMessage!.isNotEmpty)
                               Container(
@@ -360,7 +360,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                                       ),
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            SizedBox(height: 16),
         
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -401,7 +401,7 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                           ],
                         ),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
         
                       Text(
                         'Find out the weather forecast around you',

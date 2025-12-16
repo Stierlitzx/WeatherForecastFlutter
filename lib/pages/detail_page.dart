@@ -19,7 +19,7 @@ class _DetailPageState extends State<DetailPage> {
   List<DailyWeather> _dailyForecast = [];
   WeatherData? _currentWeather;
   bool _isLoading = true;
-  String _forecastType = 'hourly'; // hourly, nearby, or static
+  String _forecastType = 'hourly';
 
   @override
   void initState() {
@@ -28,71 +28,73 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Future<void> _loadForecastData() async {
-    setState(() {
-      _isLoading = true;
-    });
+    _setLoading(true);
 
     try {
-      // Load current weather for the metrics
       _currentWeather = await _weatherService.getCurrentWeather();
 
-      // Try to get hourly forecast first
-      final hourly = await _weatherService.getHourlyForecast();
-      
-      if(hourly.isNotEmpty) {
-        setState(() {
-          _hourlyForecast = hourly;
-          _forecastType = 'hourly';
-          _isLoading = false; 
-        });
+      final hourlyData = await _weatherService.getHourlyForecast();
+
+      if (hourlyData.isNotEmpty) {
+        _updateHourly(hourlyData);
       } else {
-        // Fallback to nearby cities
-        try {
-          final position = await _weatherService.getCurrentLocation();
-          final nearby = await _weatherService.getNearbyCitiesWeather(
-            position.latitude, 
-            position.longitude
-          );
-          
-          if(nearby.isNotEmpty) {
-            setState(() {
-              _cityWeather = nearby;
-              _forecastType = 'nearby';
-              _isLoading = false;
-            });
-          } else {
-            // Final fallback to static cities
-            final static = await _weatherService.getStaticCitiesWeather();
-            setState(() {
-              _cityWeather = static;
-              _forecastType = 'static';
-              _isLoading = false;
-            });
-          }
-        } catch(e) {
-          // If location fails, go straight to static cities
-          final static = await _weatherService.getStaticCitiesWeather();
-          setState(() {
-            _cityWeather = static;
-            _forecastType = 'static';
-            _isLoading = false;
-          });
-        }
+        await _loadNearbyOrStaticCities();
       }
 
-      // Load daily forecast
-      final daily = await _weatherService.getDailyForecast();
-      setState(() {
-        _dailyForecast = daily;
-      });
-
-    } catch(e) {
-      print('Error loading forecast: $e');
-      setState(() {
-        _isLoading = false;
-      });
-    }
+      final dailyData = await _weatherService.getDailyForecast();
+      if (mounted) {
+        setState(() => _dailyForecast = dailyData);
+      }
+    } catch (e) {
+      debugPrint('Oops, failed to load forecast: $e');
+      _setLoading(false);
   }
+}
+
+void _setLoading(bool value) {
+  if (!mounted) return;
+  setState(() => _isLoading = value);
+}
+
+void _updateHourly(List<HourlyWeather> data) {
+  if (!mounted) return;
+  setState(() {
+    _hourlyForecast = data;
+    _forecastType = 'hourly';
+    _isLoading = false;
+  });
+}
+
+Future<void> _loadNearbyOrStaticCities() async {
+  try {
+    final pos = await _weatherService.getCurrentLocation();
+    final nearbyCities = await _weatherService.getNearbyCitiesWeather(
+      pos.latitude,
+      pos.longitude,
+    );
+
+    if (nearbyCities.isNotEmpty) {
+      _updateCities(nearbyCities, 'nearby');
+    } else {
+      final staticCities = await _weatherService.getStaticCitiesWeather();
+      _updateCities(staticCities, 'static');
+    }
+  } catch (e) {
+    debugPrint('Couldn’t get location, loading static cities: $e');
+    final staticCities = await _weatherService.getStaticCitiesWeather();
+    _updateCities(staticCities, 'static');
+  }
+}
+
+void _updateCities(List<CityWeather> cities, String type) {
+  if (!mounted) return;
+  setState(() {
+    _cityWeather = cities;
+    _forecastType = type;
+    _isLoading = false;
+  });
+}
+
 
   Widget _buildTimeCards() {
     if(_forecastType == 'hourly' && _hourlyForecast.isNotEmpty) {
