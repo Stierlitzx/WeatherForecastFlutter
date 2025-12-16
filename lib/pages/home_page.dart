@@ -24,35 +24,46 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _loadWeather() async {
-  try {
-    if (!mounted) return; // Add this check
-    
-    setState(() {
-      _isLoading = true;
-      _errorMessage = '';
-    });
+    // Simple loader: get weather and update state
+    try {
+      if (!mounted) return;
 
-    final weather = await _weatherService.getCurrentWeather();
+      setState(() {
+        _isLoading = true;
+        _errorMessage = '';
+      });
 
-    if (!mounted) return; 
-    
-    setState(() {
-      _weatherData = weather;
-      _isLoading = false;
-    });
-  } catch (e) {
-    if (!mounted) return;
-    
-    setState(() {
-      _isLoading = false;
-      _errorMessage = e.toString();
-    });
-  }
+      // getCurrentWeather might throw if location or network fails
+      final weather = await _weatherService.getCurrentWeather();
+
+      if (!mounted) return;
+
+      setState(() {
+        _weatherData = weather;
+        _isLoading = false;
+      });
+    } catch (e) {
+      // for debugging, print the error
+      print('Load weather error: $e');
+      if (!mounted) return;
+      setState(() {
+        _isLoading = false;
+        // show a simple message to the user
+        _errorMessage = 'Could not load weather. Please try again.';
+      });
+    }
 }
 
   String _getFormattedDate() {
+    // if we don't have weather yet, show a basic label
     if (_weatherData == null) return 'Today';
-    return DateFormat('EEEE, d MMMM').format(_weatherData!.time);
+    // format like: Monday, 1 January
+    try {
+      return DateFormat('EEEE, d MMMM').format(_weatherData!.time);
+    } catch (e) {
+      print('Date format error: $e');
+      return 'Today';
+    }
   }
 
   @override

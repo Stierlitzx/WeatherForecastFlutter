@@ -4,6 +4,7 @@ import 'package:weather_app_final/widgets/day_card.dart';
 import 'package:weather_app_final/widgets/weather_background.dart';
 import 'package:weather_app_final/services/weather_service.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_app_final/pages/registration_page.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage({super.key});
@@ -183,6 +184,15 @@ void _updateCities(List<CityWeather> cities, String type) {
                         ),
                         Expanded(child: Container()),
                         GestureDetector(
+                          onTap: () {
+                            print('Pressed setting');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegistrationPage(),
+                              ),
+                            );
+                          },
                           child: Image(
                             width: 24,
                             image: AssetImage('assets/setting.png')
