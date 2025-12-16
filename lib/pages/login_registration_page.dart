@@ -156,21 +156,21 @@ class _LoginRegistrationPageState extends State<LoginRegistrationPage> with Sing
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(24),
+                        padding: const EdgeInsets.all(0),
                         decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.3),
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
-                          isLogin ? Icons.wb_sunny_rounded : Icons.cloud_rounded,
-                          size: 80,
-                          color: Colors.white,
+                        child: Image(
+                          width: 160,
+                          height: 160,
+                          image: isLogin ? AssetImage('assets/clear.png') : AssetImage('assets/cloudy.png'),
                         ),
                       ),
                       const SizedBox(height: 32),
         
                       Text(
-                        'Weather App',
+                        'Weather Forecast',
                         style: TextStyle(
                           fontSize: 36,
                           fontWeight: FontWeight.bold,
