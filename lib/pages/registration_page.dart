@@ -18,7 +18,21 @@ class RegistrationPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text('Account Page'),
+          title: Text(
+            'Account Page',
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+            ),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+
         ),
         body: Container(
           padding: EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
