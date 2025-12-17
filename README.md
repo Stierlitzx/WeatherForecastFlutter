@@ -64,7 +64,7 @@ Example usage:
 | ![Screen](Screenshot_1765981097.png) | ![Screen](Screenshot_1765981137.png) | ![Screen](Screenshot_1765981179.png) |
 |--------------------------|--------------------------|--------------------------|
 | ![Screen](Screenshot_1765981195.png) | ![Screen](Screenshot_1765986078.png) | ![Screen](Screenshot_1765986096.png) |
-| ![Screen](Screenshot_1765986099.png) | ![Screen](Screenshot_1765986102.png) | ![Screen](Screenshot_1765986116.png) |
+| ![Screen](Screenshot_1765986099.png) | ![Screen](Screenshot_1765988171.png) | ![Screen](Screenshot_1765986116.png) |
 | ![Screen](Screenshot_1765986118.png) | ![Screen](Screenshot_1765986130.png) | ![Screen](Screenshot_1765986193.png) |
 
 ---
