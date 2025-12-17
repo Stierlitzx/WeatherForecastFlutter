@@ -142,55 +142,59 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0),
                           child: Column(
                             children: [
-                              SizedBox(height: 20),
+                              SizedBox(height: 32),
                               Row(
                                 children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      print('location pressed');
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Column(
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        print('location pressed');
+                                      },
+                                      child: Row(
                                           children: [
-                                            Image(
-                                              height: 24,
-                                              width: 24,
-                                              color: Colors.white,
-                                              image: AssetImage('assets/mark.png'),
-                                              fit: BoxFit.cover,
+                                            Column(
+                                              children: [
+                                                Image(
+                                                  height: 24,
+                                                  width: 24,
+                                                  color: Colors.white,
+                                                  image: AssetImage('assets/mark.png'),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                SizedBox(height: 4),
+                                              ],
                                             ),
-                                            SizedBox(height: 4),
+                                            SizedBox(width: 24),
+                                            Expanded(
+                                              child: Text(
+                                                _weatherData?.cityName ?? 'Loading...',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontFamily: 'Overpass',
+                                                  fontSize: 24,
+                                                  fontWeight: FontWeight.bold,
+                                                  shadows: [
+                                                    Shadow(
+                                                      offset: Offset(-1.0, 1.0),
+                                                      blurRadius: 3.0,
+                                                      color: Colors.black.withOpacity(0.3),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 14,),
+                                            Icon(
+                                              Icons.keyboard_arrow_down_outlined,
+                                              color: Colors.white,
+                                              size: 24,
+                                            ),
                                           ],
                                         ),
-                                        SizedBox(width: 24),
-                                        Text(
-                                          _weatherData?.cityName ?? 'Loading...',
-                                          overflow: TextOverflow.fade,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontFamily: 'Overpass',
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            shadows: [
-                                              Shadow(
-                                                offset: Offset(-1.0, 1.0),
-                                                blurRadius: 3.0,
-                                                color: Colors.black.withOpacity(0.3),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(width: 14),
-                                        Icon(
-                                          Icons.keyboard_arrow_down_outlined,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                      ],
                                     ),
                                   ),
-                                  Expanded(child: Container()),
                                   IconButton(
                                     icon: Icon(
                                       Icons.notifications_none_rounded,
@@ -433,7 +437,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 40),
+                              SizedBox(height: 80),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: ElevatedButton(
