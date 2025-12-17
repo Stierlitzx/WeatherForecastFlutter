@@ -47,17 +47,17 @@ The application includes 12 screenshots showing the main features and UI.
 All screenshots are located in the `screenshots` folder.
 
 1. Login screen  
-2. Registration screen  
-3. Home screen (today’s weather)  
-4. Current location weather  
-5. City search screen  
-6. City list selection  
-7. Hourly forecast  
-8. Hourly forecast details  
-9. 7-day forecast  
-10. UV index, wind speed, air pressure  
-11. Account page  
-12. Logout screen  
+2. Login correctnes  
+3. Registration screen 
+4. Asking GPS Permisition 
+5. Home screen 
+6. Hourly forecast up to 24 hours  
+7. Daily forecast and today UV index, wind speed, air pressure 
+8. Account page
+9. Home screen with another location
+10. City selection screen
+11. City selection search screen 
+12. Choosen new city home screen info
 
 Example usage:
 
@@ -117,6 +117,6 @@ The Weather Forecast app meets the capstone project requirements and works as in
 
 ---
 
-Author: Your Name  
+Author: Ayazgaliyev Aibek 
 Course: Mobile App Development (Capstone Project)  
 Year: 2025
