@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_final/pages/detail_page.dart';
+import 'package:weather_app_final/pages/map_page.dart';
 import 'package:weather_app_final/widgets/weather_background.dart';
 import 'package:weather_app_final/services/weather_service.dart';
 import 'package:intl/intl.dart';
@@ -52,6 +53,38 @@ class _HomeScreenState extends State<HomeScreen> {
         _errorMessage = 'Could not load weather. Please try again.';
       });
     }
+}
+
+Future<void> _loadWeatherForCity(Map<String, dynamic> cityData) async {
+  try {
+    if (!mounted) return;
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = '';
+    });
+
+    final data = await _weatherService.getWeatherData(
+      cityData['lat'], 
+      cityData['lon']
+    );
+    
+    final weather = WeatherData.fromJson(data, cityData['name']);
+
+    if (!mounted) return;
+
+    setState(() {
+      _weatherData = weather;
+      _isLoading = false;
+    });
+  } catch (e) {
+    print('Load city weather error: $e');
+    if (!mounted) return;
+    setState(() {
+      _isLoading = false;
+      _errorMessage = 'Could not load weather for ${cityData['name']}';
+    });
+  }
 }
 
   String _getFormattedDate() {
@@ -147,7 +180,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   Expanded(
                                     child: GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
+                                        final selectedCity = await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const CitySelectionPage(),
+                                          ),
+                                        );
+
+                                        if (selectedCity != null) {
+                                          print('Selected: ${selectedCity['name']}');
+                                          _loadWeatherForCity(selectedCity);
+                                        }
                                         print('location pressed');
                                       },
                                       child: Row(
@@ -165,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                             ),
                                             SizedBox(width: 24),
-                                            Expanded(
+                                            Flexible(
                                               child: Text(
                                                 _weatherData?.cityName ?? 'Loading...',
                                                 maxLines: 1,
@@ -437,7 +481,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 80),
+                              SizedBox(height: 70),
                               Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 20),
                                 child: ElevatedButton(
